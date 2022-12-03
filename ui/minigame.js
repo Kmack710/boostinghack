@@ -51,7 +51,11 @@ const randomSetChar = () => {
 window.onload = ('message', (e) => {
     window.addEventListener('message', (event) => {
         if (event.data.action === 'start') {
-            start();
+            let diff = event.data.diff;
+            let time = event.data.time;
+            console.log(diff);
+            console.log(time);
+            start(diff, time);
         }
     });
 })
@@ -165,14 +169,14 @@ let drawPosition = (className = 'red', deleteClass = true) => {
     });
 }
 
-function start() {
+function start(diff, time) {
     document.getElementById('html').style.display = "";
     codes_pos = 0;
     current_pos = 43;
 
     let randomNumber = Math.floor(Math.random() * 6);
     let randomChoice = ['numeric', 'alphabet', 'alphanumeric', 'greek', 'braille', 'runes']
-    sets = randomChoice[randomNumber];
+    sets = diff;
 
     document.querySelector('.splash .text').innerHTML = 'PREPARING INTERFACE...';
 
@@ -204,7 +208,7 @@ function start() {
 
         game_started = true;
 
-        let timeout = 20;
+        let timeout = time;
         startTimer(timeout);
         timeout *= 1000;
 
